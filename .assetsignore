@@ -1,0 +1,11 @@
+src/**
+wrangler.jsonc
+.assetsignore
+package.json
+package-lock.json
+README.md
+.gitignore
+.dev.vars*
+.env*
+.git/**
+node_modules/**
