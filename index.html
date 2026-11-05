@@ -315,7 +315,10 @@
             </div>
           </div>
         </div>
-        <form id="enquiryForm" class="contact-form">
+        <form
+          id="enquiryForm"
+          class="contact-form"
+        >
           <h3>Send an enquiry</h3>
           <label
             >Your name<input name="name" required placeholder="Full name"
@@ -339,13 +342,9 @@
             ></textarea>
           </label>
           <button class="button primary" type="submit">
-            Prepare enquiry <b>→</b>
+            Send enquiry <b>→</b>
           </button>
-          <small class="form-note"
-            >The form opens your email application. It does not store
-            submissions on this website.</small
-          >
-          <p id="formStatus" aria-live="polite"></p>
+          <p id="formStatus" role="status" aria-live="polite"></p>
         </form>
       </section>
     </main>

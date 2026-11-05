@@ -1,4 +1,4 @@
-const COMPANY_EMAIL = "info@lankafreshandfrozen.com";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/myeeovlq";
 document.getElementById("year").textContent = new Date().getFullYear();
 
 const menuButton = document.getElementById("menuToggle");
@@ -16,14 +16,41 @@ nav.querySelectorAll("a").forEach((link) =>
   }),
 );
 
-document.getElementById("enquiryForm").addEventListener("submit", (event) => {
+const enquiryForm = document.getElementById("enquiryForm");
+
+enquiryForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const data = new FormData(event.currentTarget);
-  const subject = encodeURIComponent("Website enquiry - Lanka Fresh");
-  const body = encodeURIComponent(
-    `Name: ${data.get("name")}\nCompany: ${data.get("company") || "Not provided"}\nEmail: ${data.get("email")}\n\nMessage:\n${data.get("message")}`,
-  );
-  document.getElementById("formStatus").textContent =
-    "Your email application should open with the enquiry prepared.";
-  window.location.href = `mailto:${COMPANY_EMAIL}?subject=${subject}&body=${body}`;
+  const form = event.currentTarget;
+  const submitButton = form.querySelector('button[type="submit"]');
+  const formStatus = document.getElementById("formStatus");
+  const data = new FormData(form);
+  data.append("_subject", "Website enquiry - Lanka Fresh");
+
+  submitButton.disabled = true;
+  form.setAttribute("aria-busy", "true");
+  formStatus.textContent = "Sending your enquiry…";
+
+  fetch(FORMSPREE_ENDPOINT, {
+    method: "POST",
+    body: data,
+    headers: { Accept: "application/json" },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Form submission failed with status ${response.status}`);
+      }
+
+      form.reset();
+      formStatus.textContent = "Your enquiry was sent successfully.";
+      window.alert("Thank you! Your enquiry was sent successfully.");
+    })
+    .catch((error) => {
+      console.error("Unable to send enquiry:", error);
+      formStatus.textContent =
+        "We couldn't send your enquiry. Please try again or email info@lankafreshandfrozen.com directly.";
+    })
+    .finally(() => {
+      submitButton.disabled = false;
+      form.removeAttribute("aria-busy");
+    });
 });

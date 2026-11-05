@@ -25,5 +25,5 @@ BEFORE GOING LIVE
 - Contact email: info@lankafreshandfrozen.com
 - The product and port images are illustrative remote images and need an internet connection.
 - Do not publish certifications, approvals, licences or food-safety claims unless verified.
-- The contact form uses a mailto link. It opens the visitor's email application; it does not store messages or submit to a website server.
+- The enquiry form submits to Formspree and shows a success alert after Formspree accepts the submission. Confirm that the Formspree form is configured to deliver to info@lankafreshandfrozen.com; inbox delivery may take additional time.
 - A pages.dev website does not itself provide email hosting.
